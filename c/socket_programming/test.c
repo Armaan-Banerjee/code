@@ -1,5 +1,5 @@
 #include<stdio.h>
 
-int main(arg c, **char argv){
+int main(int argc, char * argv[]){
     printf("hello there");
 }

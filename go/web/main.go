@@ -1,4 +1,4 @@
-packgae main
+package main
 
 import (
     "net/http"
@@ -10,7 +10,6 @@ type album struct{
     Title string `json:"title"`
     Price string `json:"price"`
     Artist string  `json:"artist"`
-    `
 }
 
 

@@ -8,7 +8,7 @@ import (
 type album struct{
     ID  string `json:"id"`
     Title string `json:"title"`
-    Price string `json:"price"`
+    Price float64 `json:"price"`
     Artist string  `json:"artist"`
 }
 

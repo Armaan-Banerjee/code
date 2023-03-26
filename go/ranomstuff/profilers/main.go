@@ -10,4 +10,11 @@ func main() {
     if err != nil {
         panic(err)
     }
+
+    err = pprof.StartCPUProfile(f)
+    if err != nil {
+        panic(err)
+    }
+
+    pprof.StopCPUProfile()
 }

@@ -42,6 +42,7 @@ func getAlbumById(c *gin.Context){
             return
         }
     }
+    c.IndentedJSON(http.StatusNotFound, gin.H{"message":"404 not found"}
 }
 
 func main(){

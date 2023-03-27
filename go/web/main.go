@@ -34,7 +34,14 @@ func postAlbums(c *gin.Context){
 }
 
 func getAlbumById(c *gin.Context){
+    id := c.Param("id")
 
+    for _, a := range albums {
+        if a.ID == ID {
+            c.IndentedJSON(http.StatusOK, a)
+            return
+        }
+    }
 }
 
 func main(){

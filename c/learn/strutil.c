@@ -8,4 +8,6 @@ int main() {
     strcpy(string2, string1);
     puts(string2);
     puts(string1);
+
+
 }

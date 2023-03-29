@@ -3,9 +3,9 @@
 
 int main() {
     char string1[20] = "hi there";
-    char string2[20] = "";
+    char string2[20];
 
-    strcpy(string1, string2);
+    strcpy(string2, string1);
     puts(string2);
     puts(string1);
 }

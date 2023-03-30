@@ -16,7 +16,7 @@ int main( ) {
 
     data.i = 8;
     data.f = 90.9;
-    data.str = "hi there";
+    strcpy(data.str, "hi there");
 
     printf("i: %i\n", data.i);
     printf("f : %f\n", data.f);

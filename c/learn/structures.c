@@ -8,6 +8,13 @@ struct Computers{
     int RAM;
 };
 
+void printbook(struct Computers computer){
+     printf("name: %s\n", computer.name);
+    printf("CPU: %s\n", computer.CPU);
+    printf("GPU: %s\n", computer.GPU);
+    printf("RAM: %i\n", computer.RAM);
+} 
+
 int main(){
     struct Computers Dell;
     struct Computers Lenovo;
@@ -31,3 +38,4 @@ int main(){
     return 0;
 
 }
+

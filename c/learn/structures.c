@@ -26,7 +26,7 @@ int main(){
     printf("name: %s\n", Dell.name);
     printf("CPU: %s\n", Dell.CPU);
     printf("GPU: %s\n", Dell.GPU);
-    printf("RAM: %i\n", Dell.RAM");
+    printf("RAM: %i\n", Dell.RAM);
 
     return 0;
 

@@ -8,8 +8,8 @@ struct Computers{
     int RAM;
 };
 
-void printbook(struct Computers computer){
-     printf("name: %s\n", computer.name);
+void printcomp(struct Computers computer){
+    printf("name: %s\n", computer.name);
     printf("CPU: %s\n", computer.CPU);
     printf("GPU: %s\n", computer.GPU);
     printf("RAM: %i\n", computer.RAM);
@@ -30,11 +30,12 @@ int main(){
     Lenovo.RAM = 4000;
 
     printf("Dell: \n");
-    printf("name: %s\n", Dell.name);
-    printf("CPU: %s\n", Dell.CPU);
-    printf("GPU: %s\n", Dell.GPU);
-    printf("RAM: %i\n", Dell.RAM);
+    printcomp(Dell);
 
+    printf("\n")
+    printf("Lenovo: \n")
+    printcomp(Lenovo)
+    
     return 0;
 
 }

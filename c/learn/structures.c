@@ -22,6 +22,12 @@ int main(){
     strcpy(Lenovo.GPU, "Integrated");
     Lenovo.RAM = 4000;
 
-    
+    printf("Dell: \n");
+    printf("name: %s\n", Dell.name);
+    printf("CPU: %s\n", Dell.CPU);
+    printf("GPU: %s\n", Dell.GPU);
+    printf("RAM: %i\n", Dell.RAM");
+
+    return 0;
 
 }

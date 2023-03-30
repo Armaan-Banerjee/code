@@ -22,6 +22,7 @@ int main( ) {
     printf("f : %f\n", data.f);
     printf("str: %s\n", data.str);
 
+    printf("\n\n");
 
     data.i = 9;
     printf("i: %i\n", data.i);

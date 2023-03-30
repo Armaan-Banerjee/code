@@ -14,7 +14,7 @@ int main(){
 
     strcpy(Dell.name, "XPS 15");
     strcpy(Dell.CPU, "Intel");
-    strcpu(Dell.GPU, "N3060");
+    strcpy(Dell.GPU, "N3060");
     Dell.RAM = 8000;
 
     strcpy(Lenovo.name, "Yoga");

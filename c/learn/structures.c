@@ -32,9 +32,9 @@ int main(){
     printf("Dell: \n");
     printcomp(Dell);
 
-    printf("\n")
-    printf("Lenovo: \n")
-    printcomp(Lenovo)
+    printf("\n");
+    printf("Lenovo: \n");
+    printcomp(Lenovo);
     
     return 0;
 

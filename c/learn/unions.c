@@ -9,10 +9,19 @@ union Data {
  
 int main( ) {
 
-   union Data data;        
+    union Data data;        
 
-   printf( "Memory size occupied by data : %ld\n", sizeof(data));
+    printf( "Memory size occupied by data : %ld\n", sizeof(data));
+    
 
-   return 0;
+    data.i = 8;
+    data.f = 90.9;
+    data.str = "hi there";
+
+    printf("i: %i\n", data.i);
+    printf("f : %f\n", data.f);
+    printf("str: %s\n", data.str);
+
+    return 0;
 }
 

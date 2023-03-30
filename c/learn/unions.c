@@ -22,6 +22,16 @@ int main( ) {
     printf("f : %f\n", data.f);
     printf("str: %s\n", data.str);
 
+
+    data.i = 9;
+    printf("i: %i\n", data.i);
+    
+    data.f = 90.9;
+    printf("f: %f\n", data.f);
+
+    strcpy(data.str, "hi there");
+    printf("str: %s\n", data.str);
+
     return 0;
 }
 

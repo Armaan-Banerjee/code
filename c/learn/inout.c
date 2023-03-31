@@ -5,10 +5,10 @@ int main() {
    char str[100];
 
    printf( "Enter a value :");
-   c = getstr( );
+   gets(str);
 
    printf( "\nYou entered: ");
-   puts(c);
+   puts(str);
 
    return 0;
 }

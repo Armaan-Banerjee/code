@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main( ) {
+int main() {
 
    int c;
 
@@ -8,7 +8,7 @@ int main( ) {
    c = getchar( );
 
    printf( "\nYou entered: ");
-   putchar( c );
+   putchar(c);
 
    return 0;
 }

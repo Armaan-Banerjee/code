@@ -9,9 +9,13 @@ int main() {
 
     printf( "\nYou entered: ");
     puts(str);
+    
+    char astr[100];
+
+    int i; 
 
     printf("Enter a nother value");
-    
+    scanf("%s %d", str, &i);
 
    return 0;
 }

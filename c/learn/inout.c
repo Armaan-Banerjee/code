@@ -17,7 +17,7 @@ int main() {
     printf("Enter a nother value");
     scanf("%s %d", str, &i);
 
-    printf("\nYou entered: %s %d ", astr, i")
+    printf("\nYou entered: %s %d ", astr, i);
 
    return 0;
 }

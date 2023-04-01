@@ -10,5 +10,8 @@ int main() {
    printf( "\nYou entered: ");
    puts(str);
 
+   printf("Enter a nother value");
+
+
    return 0;
 }

@@ -2,16 +2,16 @@
 
 int main() {
 
-   char str[100];
+    char str[100];
 
-   printf( "Enter a value :");
-   gets(str);
+    printf( "Enter a value :");
+    gets(str);
 
-   printf( "\nYou entered: ");
-   puts(str);
+    printf( "\nYou entered: ");
+    puts(str);
 
-   printf("Enter a nother value");
-
+    printf("Enter a nother value");
+    
 
    return 0;
 }

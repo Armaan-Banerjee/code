@@ -26,4 +26,4 @@ def get_devices():
 if __name__ == "__main__":
     devoces = get_devices()
     for device in devices:
-        print(f"ip address: {device["ip_address"]} \n MAC address: {device["mac_address"]}")
+        print(f'ip address: {device["ip_address"]} \n MAC address: {device["mac_address"]}')

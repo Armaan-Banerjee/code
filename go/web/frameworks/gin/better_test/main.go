@@ -1,7 +1,6 @@
 package main
 
 import (
-  "net/http"
 
   "github.com/gin-gonic/gin"
 )
@@ -16,6 +15,8 @@ func main() {
     router.LoadHTMLGlob("templates/*")
 
     router.GET("/", showIndexPage)
+    
+    router.GET("/article/view/:article_id", getArticle )
 
     router.Run(":8432")
 }

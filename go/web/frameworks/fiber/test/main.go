@@ -9,7 +9,7 @@ func main(){
 
     app.Get("/", func(c *fiber.Ctx) error {
       err := c.SendString("And the API is UP!")
-      :return err
+      return err
     })
 
     app.Get("/hello", func (c *fiber.Ctx) error {

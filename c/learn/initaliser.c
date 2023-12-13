@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 float dot_product(float vector_a[], float vector_b[], size_t size_a, size_t size_b) {
     float total = 0;
@@ -48,12 +49,24 @@ float *add_vecs(float vector_a[], float vector_b[], size_t size_a, size_t size_b
 
 }
 
+float magnitude(float vector[], size_t size_vec){
+
+    double mag_sq = 0;
+    
+    for (int i = 0; i < size_vec; i++){
+        mag_sq += vector[i] * vector[i];
+    }
+
+    return sqrt(mag_sq);
+
+}
+
 
 int main(){
 
     float vec_a[3] = {1, 2, 3};
 
-    float vec_b[3] = {1, 2, 3};
+    float vec_b[3] = {1, 4, 3};
 
     size_t size_vec_a = sizeof(vec_a) / sizeof(vec_a[0]);
     size_t size_vec_b = sizeof(vec_b) / sizeof(vec_b[0]);
@@ -99,5 +112,13 @@ int main(){
     for (int i = 0; i < size_vec_a; i++){
         printf("%f", added_result[i]);
     }
+
+    printf("\n magnitude vector a: \n");
+    double mag_a = magnitude(vec_a, size_vec_a);
+    printf("%f", mag_a);
+
+    printf("\n magnitude vector b: \n");
+    double mag_b = magnitude(vec_b, size_vec_b);
+    printf("%f", mag_b);
 
 }

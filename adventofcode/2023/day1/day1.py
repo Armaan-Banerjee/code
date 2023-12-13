@@ -1,9 +1,12 @@
 
-#with open("./input.txt", "r") as file:
- #   text = file.read()
+with open("./input.txt", "r") as file:
+    text = file.read().strip()
+    print(file.read())
 
-text = ["1abc2", "pqr3stu8vwx", "a1b2c3d4e5f"
-, "treb7uchet"]
+text.split('\n\n')
+#print(text[-1])
+
+#text = ["1abc2","pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet"]
 
 passes = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
@@ -14,7 +17,7 @@ for word in text:
     right_ptr = len(word) - 1
 
     first_digit = 0
-    last_diigt = 0
+    last_digit = 0
 
     stop_left = False
     stop_right = False
@@ -32,8 +35,6 @@ for word in text:
 
             stop_right = True
 
-        print(word[left_ptr])
-        print(word[right_ptr])
         left_ptr += 1
         right_ptr -= 1
 
@@ -45,7 +46,6 @@ for word in text:
     else:
         digit_str = first_digit + last_digit
 
-    print(digit_str)
     total += int(digit_str)
 
 print(total)

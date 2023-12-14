@@ -1,0 +1,10 @@
+<head>
+</head>
+<body>
+    <h1>Hi!<h1>
+
+    <ul>   
+    {% for page in pages %}
+        <li><a href="/page/{{page.id}}/{{page.title}}">{{page.title}}</li>    
+    {% endfor %}
+</body>

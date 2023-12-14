@@ -1,0 +1,10 @@
+<html>
+    <body>
+        <h1>Glossary of users</h1>
+        <ul>
+            {% for user in users %}
+            <li> <a href="/user/{{user.id}}">{{ user.first_name }} {{ user.last_name }} </a> </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

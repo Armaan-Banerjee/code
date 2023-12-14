@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            textarea {
+            width: 80vw; /* 80% of the viewport width */
+            height: 60vh; /* 60% of the viewport height */
+            resize: none; /* Prevent resizing by the user */
+            }
+        </style>
+    </head>
+    <body>
+        <a href="/"><button>Go to home</button></a>
+        <h1>{{page.title}} </h1>
+
+        <textarea readonly> {{page.data | safe}} </textarea>
+    </body>
+</html>

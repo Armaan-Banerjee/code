@@ -7,7 +7,7 @@ class page(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     data = models.TextField()
-    tags = models.ManyToManyField("Tag")
+    tags = models.ManyToManyField("Tag", blank=True, related_name="page")
 
     def __str__(self):
         return f"{self.title} | {self.id}"
@@ -24,8 +24,9 @@ class page(models.Model):
 class Tag(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
-    pages = models.ManyToManyField("page")
+    pages = models.ManyToManyField("page", blank=True, related_name="tag")
 
+    @staticmethod
     def check_if_valid(name):
         results = Tag.objects.filter(name=name)
         if len(results) > 0:
@@ -38,12 +39,12 @@ class Tag(models.Model):
         return results
     
     def set_all():
-        results = Tag.objects.all().values_list("name", flat=True)
+        results = Tag.objects.all().values()
         end = []
-        for i, res in enumerate(results):
-            s = (i, res)
-            end.append(s)
-        
+        for res in results:
+            ou = (res["id"], res["name"])
+            end.append(ou)
+
         return end
     
     def __str__(self):

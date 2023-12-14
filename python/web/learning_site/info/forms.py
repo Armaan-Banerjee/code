@@ -6,7 +6,7 @@ class create_new_page(forms.Form):
     data = forms.CharField(widget=forms.Textarea, help_text="Please enter the text")
     OPTIONS = Tag.set_all()
     tags = forms.MultipleChoiceField(help_text="Please enter the name for this tag", widget=forms.CheckboxSelectMultiple,
-    choices=OPTIONS)
+    choices=OPTIONS, required=False)
 
 class add_tags_to_page(forms.Form):
     page = forms.UUIDField()

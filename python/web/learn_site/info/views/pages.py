@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from ..models import page, Tags
+from ..models import Pages, Tags
 from ..forms import create_new_page, create_new_tag
 
 def info_index(request):
-    pages = page.objects.all().values()
+    pages = Pages.objects.all().values()
     template = loader.get_template('index.html')
 
     context = {
@@ -14,7 +14,7 @@ def info_index(request):
     return HttpResponse(template.render(context, request))
 
 def handle_page_get(request, id, title):
-    page_get = page.objects.get(id=id)
+    page_get = Pages.objects.get(id=id)
 
     tags = page_get.show_tags()
 
@@ -39,7 +39,7 @@ def handle_page_create(request):
             tags = form.cleaned_data["tags"]
             
 
-            new_page = page(title=data["title"], data=data["data"])
+            new_page = Pages(title=data["title"], data=data["data"])
 
             list_t = []
             for tag in tags:

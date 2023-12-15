@@ -3,18 +3,75 @@ import uuid
 from django.utils import timezone
 
 # Create your models here.
+class Tags(models.Model):
 
-class page(models.Model):
+    class Meta:
+        db_table = 'info_tags'
+        managed = True
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255)
+    pages = models.ManyToManyField("Pages", blank=True, related_name="Tags")
+    details = models.TextField(null=True, blank=True, default="")
+    date_created = models.DateTimeField(default=timezone.now)
+
+    def update_name(self, name):
+        self.name = name
+        self.save()
+
+        return self.name
+
+    def delete_tag(self):
+        try:
+            pages = self.pages
+
+            for page in pages:
+                page.tags.remove(self)
+
+            self.delete()
+
+            return 1
+        
+        except:
+            return -1
+
+
+    @staticmethod
+    def check_if_valid(name):
+        results = Tags.objects.filter(name=name).exists()
+        return results
+        
+    def list_all():
+        results = Tags.objects.all().values_list("name", flat=True)
+        return results
+    
+    def set_all():
+        results = Tags.objects.all().values()
+        end = []
+        for res in results:
+            ou = (res["id"], res["name"])
+            end.append(ou)
+
+        return end
+    
+    def show_pages(self):
+        return self.pages.all()
+    
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Pages(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     data = models.TextField()
-    tags = models.ManyToManyField("Tags", blank=True, related_name="pages")
+    tags = models.ManyToManyField("Tags", blank=True, related_name="Pages")
 
     def __str__(self):
         return f"{self.title} | {self.id}"
     
     def add_page(self, title, data):
-        new_page = page(title=title, data=data)
+        new_page = Pages(title=title, data=data)
         new_page.save()
 
         return new_page.id
@@ -44,62 +101,3 @@ class page(models.Model):
         except:
             return -1
     
-class Tags(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=255)
-    pages = models.ManyToManyField("page", blank=True, related_name="tags")
-    details = models.CharField(null=True, blank=True, default="")
-    date_created = models.DateTimeField(default=timezone.now)
-
-    class Meta:
-        managed = True
-
-    def update_name(self, name):
-        self.name = name
-        self.save()
-
-        return self.name
-
-    def delete_tag(self):
-        try:
-            pages = self.pages
-
-            for page in pages:
-                page.tags.remove(self)
-
-            self.delete()
-
-            return 1
-        
-        except:
-            return -1
-
-
-    @staticmethod
-    def check_if_valid(name):
-        results = Tags.objects.filter(name=name)
-        if len(results) > 0:
-            return False
-        else:
-            return True
-        
-    def list_all():
-        results = Tags.objects.all().values_list("name", flat=True)
-        return results
-    
-    def set_all():
-        results = Tags.objects.all().values()
-        end = []
-        for res in results:
-            ou = (res["id"], res["name"])
-            end.append(ou)
-
-        return end
-    
-    def show_pages(self):
-        return self.pages.all()
-    
-    def __str__(self):
-        return f"{self.name}"
-
-

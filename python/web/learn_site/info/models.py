@@ -8,7 +8,7 @@ class page(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     data = models.TextField()
-    tags = models.ManyToManyField("Tag", blank=True, related_name="page")
+    tags = models.ManyToManyField("Tags", blank=True, related_name="pages")
 
     def __str__(self):
         return f"{self.title} | {self.id}"
@@ -25,7 +25,7 @@ class page(models.Model):
     def add_tag(self, tag_id):
 
         try:
-            tag = Tag.objects.get(id=tag_id)
+            tag = Tags.objects.get(id=tag_id)
             self.tags.add(tag)
             self.save()
             return 1
@@ -36,7 +36,7 @@ class page(models.Model):
 
     def delete_tag(self, tag_id):
         try:
-            tag = Tag.objects.get(id=tag_id)
+            tag = Tags.objects.get(id=tag_id)
             self.tags.remove(tag)
             self.save()
 
@@ -44,10 +44,10 @@ class page(models.Model):
         except:
             return -1
     
-class Tag(models.Model):
+class Tags(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
-    pages = models.ManyToManyField("page", blank=True, related_name="tag")
+    pages = models.ManyToManyField("page", blank=True, related_name="tags")
     details = models.CharField(null=True, blank=True, default="")
     date_created = models.DateTimeField(default=timezone.now)
 
@@ -77,18 +77,18 @@ class Tag(models.Model):
 
     @staticmethod
     def check_if_valid(name):
-        results = Tag.objects.filter(name=name)
+        results = Tags.objects.filter(name=name)
         if len(results) > 0:
             return False
         else:
             return True
         
     def list_all():
-        results = Tag.objects.all().values_list("name", flat=True)
+        results = Tags.objects.all().values_list("name", flat=True)
         return results
     
     def set_all():
-        results = Tag.objects.all().values()
+        results = Tags.objects.all().values()
         end = []
         for res in results:
             ou = (res["id"], res["name"])

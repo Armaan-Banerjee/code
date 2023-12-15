@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from ..models import page, Tag
+from ..models import page, Tags
 from ..forms import create_new_page, create_new_tag
 
 def info_index(request):
@@ -43,7 +43,7 @@ def handle_page_create(request):
 
             list_t = []
             for tag in tags:
-                real_t = Tag.objects.get(id=tag)
+                real_t = Tags.objects.get(id=tag)
                 list_t.append(real_t)
 
             new_page.tags.set(list_t)

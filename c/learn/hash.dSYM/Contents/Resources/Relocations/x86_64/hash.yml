@@ -1,0 +1,8 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     hash
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _hash_function, symObjAddr: 0x0, symBinAddr: 0x100003ED0, symSize: 0x60 }
+  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _hash_function, symObjAddr: 0x0, symBinAddr: 0x100003ED0, symSize: 0x60 }
+  - { offsetInCU: 0x93, offset: 0x93, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x60, symBinAddr: 0x100003F30, symSize: 0x4D }
+...

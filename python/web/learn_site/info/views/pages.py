@@ -6,17 +6,19 @@ from ..forms import create_new_page, create_new_tag
 
 def info_index(request):
     pages = Pages.objects.all().values()
+    tags = Tags.objects.all().values()
     template = loader.get_template('index.html')
 
     context = {
-        "pages" : pages
+        "pages" : pages,
+        "tags": tags
     }
     return HttpResponse(template.render(context, request))
 
 def handle_page_get(request, id, title):
     page_get = Pages.objects.get(id=id)
 
-    tags = page_get.show_tags()
+    tags = page_get.Tags.all()
 
     template = loader.get_template("default_Page.html")
 
@@ -37,19 +39,15 @@ def handle_page_create(request):
             data = form.cleaned_data
     
             tags = form.cleaned_data["tags"]
-            
 
             new_page = Pages(title=data["title"], data=data["data"])
 
-            list_t = []
-            for tag in tags:
-                real_t = Tags.objects.get(id=tag)
-                list_t.append(real_t)
-
-            new_page.tags.set(list_t)
-
             new_page.save()
 
+            for tag in tags:
+                real_t = Tags.objects.get(id=tag)
+                new_page.Tags.add(real_t)
+            
             id = new_page.id
             title = new_page.title
 
@@ -61,6 +59,8 @@ def handle_page_create(request):
         #print(form)
 
         form_tag = create_new_tag()
+
+        tags = Tags.set_all()
 
         template = loader.get_template("add_page.html")
 

@@ -3,8 +3,17 @@
 <body>
     <h1>Hi!<h1>
 
+    <a href="/page/add"><button>add page</button></a>
+    <h3>Pages:</h3>
     <ul>   
     {% for page in pages %}
-        <li><a href="/page/{{page.id}}/{{page.title}}">{{page.title}}</li>    
+        <li><a href="/page/{{page.id}}/{{page.title}}">{{page.title}}</a></li>    
     {% endfor %}
+    </ul>
+    <ul>
+    <h3>Tags: </h3>
+    {% for tag in tags %}
+        <li><a href="/tag/{{tag.id}}/{{tag.name}}">{{tag.name}}</a></li>
+    {% endfor %}
+    </ul>
 </body>

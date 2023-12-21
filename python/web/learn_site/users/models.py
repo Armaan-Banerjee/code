@@ -1,17 +1,10 @@
-from django.utils import timezone
 from django.db import models
 import uuid
-import datetime
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-class User(models.Model):
+class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-    email = models.EmailField()
-    backup_email = models.EmailField(null=True, blank=True)
-    date_joined = models.DateTimeField(default=timezone.now)
     bookmarks = models.ManyToManyField("Bookmark", blank=True, related_name="Bookmark")
 
     def __str__(self):

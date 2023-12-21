@@ -15,10 +15,11 @@
         <h1>{{page.title}} </h1>
 
         <textarea readonly> {{page.data | safe}} </textarea>
-        
+
+        <h3>Tags:</h3>
         <ul>
         {% for tag in tags %}
-            <li> {{tag.name}} <li>
+            <li> <a href="/tag/{{tag.id}}/{{tag.name}}">{{tag.name}}</a> </li>
         {% endfor %}
         </ul>
     </body>

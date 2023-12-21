@@ -1,6 +1,6 @@
 from django.urls import path
 from .views.pages import info_index, handle_page_create, handle_page_get
-from .views.tags import add_new_tag, show_tag_details, tag_glossary
+from .views.tags import add_new_tag, show_tag_details, tag_glossary, edit_tag_view
 
 urlpatterns = [
     path("", info_index, name="users"),
@@ -9,4 +9,5 @@ urlpatterns = [
     path("tags/add", add_new_tag, name="addign tags"),
     path("tag/<uuid:id>/<str:name>", show_tag_details, name="tag glossary"),
     path("tags/glossary", tag_glossary, name="tag glossary"),
+    path("tags/edit/<uuid:id>/<str:name>", edit_tag_view, name="edit tag")
 ]

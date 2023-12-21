@@ -4,10 +4,11 @@
     <body>
         <a href="/"><button>Home</button></a>
         <a href="/tags/glossary"><button>All tags</button></a>
+        <a href="/tags/edit/{{tag.id}}/{{tag.name}}"><button>edit tag</button></a> 
         <h1>{{tag.name}}</h1>
 
         <p>{{tag.details}}</p>
-        {% if tag.pages|length > 0 %}
+        {% if pages|length > 0 %}
         <h3>Pages:</h3>
         <ul>
             {% for page in pages %}

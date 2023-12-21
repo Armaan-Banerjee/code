@@ -40,7 +40,7 @@ def show_tag_details(request, name, id):
 
     return HttpResponse(template.render(context, request))
 
-def edit_tag(request, name, id):
+def edit_tag_view(request, name, id):
     tag = Tags.objects.get(id=id)
 
     if request.method == "POST":
@@ -49,9 +49,6 @@ def edit_tag(request, name, id):
         if form.is_valid():
             name = form.cleaned_data["name"]
             details = form.cleaned_data["details"]
-
-            if Tags.check_if_valid(name=name):
-                return HttpResponse("Error: tag already exists")
             
             if details != "":
                 tag.details = details
@@ -60,6 +57,20 @@ def edit_tag(request, name, id):
             else:
                 tag.name = name
                 tag.save()
+            
+            return HttpResponseRedirect(f"/tag/{tag.id}/{tag.name}")
+    
+    else:
+        form = edit_tag(initial={"name":tag.name, "details":tag.details})
+
+        template = loader.get_template("edit_tag.html")
+
+        context = {
+            "form_tag" : form,
+        }
+
+        return HttpResponse(template.render(context, request))
+        
 
 def tag_glossary(request):
     tags = Tags.objects.all()

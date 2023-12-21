@@ -1,0 +1,13 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>{{tag.name}}</h1>
+
+        <ul>
+            {% for page in pages %}
+            <li><a href="/page/{{page.id}}/{{page.title}}">{{page.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

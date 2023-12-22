@@ -130,7 +130,7 @@ class Comment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     pages = models.ForeignKey("Pages", blank=True, null=True ,on_delete=models.SET_NULL)
     user = models.ForeignKey("users.User", on_delete=models.SET_NULL, blank=True, null=True)
-    date_creaated = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
 
     def __str__(self):

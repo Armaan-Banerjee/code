@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from ..models import Pages, Tags
 from ..forms import create_new_page, create_new_tag
+from django.utils.text import slugify
 
 def info_index(request):
     pages = Pages.objects.all().values()
@@ -16,7 +17,7 @@ def info_index(request):
     return HttpResponse(template.render(context, request))
 
 def handle_page_get(request, id, title):
-    page_get = Pages.objects.get(id=id)
+    page_get = get_object_or_404(Pages, id=id)
 
     tags = page_get.Tags.all()
 
@@ -40,7 +41,10 @@ def handle_page_create(request):
     
             tags = form.cleaned_data["tags"]
 
-            new_page = Pages(title=data["title"], data=data["data"])
+            title = data["title"]
+            title_slug = slugify(title)
+
+            new_page = Pages(title=title_slug, data=data["data"])
 
             new_page.save()
 

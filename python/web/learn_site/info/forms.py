@@ -21,3 +21,6 @@ class create_new_tag(forms.Form):
 class edit_tag(forms.Form):
     name = forms.CharField(max_length=255, help_text="please enter name of tag")
     details = forms.CharField(widget=forms.Textarea, required=False)
+
+class create_comment(forms.Form):
+    text = forms.CharField(widget=forms.Textarea)

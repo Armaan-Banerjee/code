@@ -1,4 +1,5 @@
 <body> 
+  {% if user.is_anonymous %}
   <h1>login</h1>
   {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
@@ -28,6 +29,11 @@
     <input type="submit" value="login">
     <input type="hidden" name="next" value="{{ next }}">
   </form>
+  {% else %}
+  <p> You are already logged in, do you want to <a href="/accounts/logout">logout instead?</a></p>
+  {% endif %}
 
   <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+
 </body>

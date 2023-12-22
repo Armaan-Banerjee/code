@@ -13,7 +13,27 @@ class Tags(models.Model):
     name = models.CharField(max_length=255)
     pages = models.ManyToManyField("Pages", blank=True, related_name="Tags")
     details = models.TextField(null=True, blank=True, default="")
-    date_created = models.DateTimeField(default=timezone.now)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = ("Tags")
+
+    def add_tag(self, name, details="", pages_optional="", *args, **kwargs):
+        new = Tags(name=name, details=details)
+        new.save()
+
+        if pages_optional != "":
+            new.pages.add(pages_optional)
+
+    def add_pages(self, pages: list):
+        for page in pages:
+            self.Tags.add(page)
+        
+        return self.Pages
+
+    def delete_pages(self, pages: list):
+        for page in pages:
+            self.Pages.remove(page)
 
     def update_name(self, name):
         self.name = name
@@ -34,7 +54,6 @@ class Tags(models.Model):
         
         except:
             return -1
-
 
     @staticmethod
     def check_if_valid(name):
@@ -67,6 +86,9 @@ class Pages(models.Model):
     data = models.TextField()
     tags = models.ManyToManyField("Tags", blank=True, related_name="Pages")
 
+    class Meta:
+        verbose_name_plural = ("Pages")
+
     def __str__(self):
         return f"{self.title} | {self.id}"
     
@@ -77,7 +99,7 @@ class Pages(models.Model):
         return new_page.id
     
     def show_tags(self):
-        return self.tags.all()
+        return self.Tags.all()
     
     def add_tag(self, tag_id):
 
@@ -100,4 +122,26 @@ class Pages(models.Model):
             return 1
         except:
             return -1
+    
+    def add_comment(self, text, user):
+        comment = Comment(text=text, user=user.id, page=self.id)
+    
+class Comment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    pages = models.ForeignKey("Pages", blank=True, null=True ,on_delete=models.SET_NULL)
+    user = models.ForeignKey("users.User", on_delete=models.SET_NULL, blank=True, null=True)
+    date_creaated = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+
+    def __str__(self):
+        return f"{self.id} | {self.text}"
+
+    @staticmethod
+    def add_comment( text: str, user, page: Pages):
+        new_comment = Comment(text=text, user=user, pages=page)
+        new_comment.save()
+
+        return new_comment
+
+
     

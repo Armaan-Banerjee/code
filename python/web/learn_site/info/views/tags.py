@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from ..models import  Tags
@@ -27,7 +27,7 @@ def add_new_tag(request):
         return HttpResponse("na")
 
 def show_tag_details(request, name, id):
-    tag = Tags.objects.get(id=id)
+    tag = get_object_or_404(Tags, id=id)
 
     pages = tag.pages.all()
 
@@ -41,7 +41,7 @@ def show_tag_details(request, name, id):
     return HttpResponse(template.render(context, request))
 
 def edit_tag_view(request, name, id):
-    tag = Tags.objects.get(id=id)
+    tag = get_object_or_404(Tags, id=id)
 
     if request.method == "POST":
         form = edit_tag(request.POST)

@@ -4,6 +4,7 @@ from django.template import loader
 from ..models import Pages, Tags
 from ..forms import create_new_page, create_new_tag, create_comment
 from django.utils.text import slugify
+from users.models import Bookmark
 
 def info_index(request):
     pages = Pages.objects.all().values()
@@ -24,9 +25,17 @@ def handle_page_get(request, id, title):
 
     tags = page_get.Tags.all()
 
-    comment_form = create_comment()
+    comment_form = create_comment(initial={"user_id":request.user.id, "page_id":page_get.id})
 
     comments = page_get.comment_set.all()
+
+    bookmarked = False
+    if request.user.is_authenticated:
+        bookmarks = request.user.bookmark_set.all()
+        for bookmark in bookmarks:
+            if bookmark.page_id == page_get.id:
+                bookmarked = True
+    
 
     template = loader.get_template("default_Page.html")
 
@@ -35,6 +44,7 @@ def handle_page_get(request, id, title):
         "tags" : tags,
         "comment_form": comment_form,
         "comments": comments,
+        "bookmarked": bookmarked
     }
 
     return HttpResponse(template.render(context, request))
@@ -50,7 +60,7 @@ def handle_page_create(request):
             tags = form.cleaned_data["tags"]
 
             title = data["title"]
-            title_slug = slugify(title)
+            title_slug = slugify(title, allow_unicode=True)
 
             new_page = Pages(title=title_slug, data=data["data"])
 
@@ -72,7 +82,8 @@ def handle_page_create(request):
 
         form_tag = create_new_tag()
 
-        tags = Tags.set_all()
+        print(form)
+        print(Tags.set_all())
 
         template = loader.get_template("add_page.html")
 

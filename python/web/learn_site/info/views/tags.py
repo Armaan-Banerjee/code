@@ -3,13 +3,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from ..models import  Tags
 from ..forms import  create_new_tag, edit_tag
+from django.utils.text import slugify
 
 def add_new_tag(request):
     if request.method == "POST":
         form = create_new_tag(request.POST)
 
         if form.is_valid():
-            name = form.cleaned_data["name"]
+            name = slugify(form.cleaned_data["name"], allow_unicode=True)
             details = form.cleaned_data["details"]
 
             if Tags.check_if_valid(name=name):
@@ -47,7 +48,7 @@ def edit_tag_view(request, name, id):
         form = edit_tag(request.POST)
 
         if form.is_valid():
-            name = form.cleaned_data["name"]
+            name = slugify(form.cleaned_data["name"], allow_unicode=True)
             details = form.cleaned_data["details"]
             
             if details != "":

@@ -60,10 +60,12 @@ class Tags(models.Model):
         results = Tags.objects.filter(name=name).exists()
         return results
         
+    @staticmethod    
     def list_all():
         results = Tags.objects.all().values_list("name", flat=True)
         return results
     
+    @staticmethod
     def set_all():
         results = Tags.objects.all().values()
         end = []

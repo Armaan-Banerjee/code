@@ -24,3 +24,5 @@ class edit_tag(forms.Form):
 
 class create_comment(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
+    page_id = forms.UUIDField()
+    user_id = forms.UUIDField()

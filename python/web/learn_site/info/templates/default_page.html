@@ -3,11 +3,18 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            .page {
-            width: 98vw; /* 98% of the viewport width */
-            height: 60vh; /* 60% of the viewport height */
-            border: none;
-            resize: none; /* Prevent resizing by the user */
+            .editable-content {
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box; /* Include padding and border in the element's total width and height */
+                padding: 10px; /* Add padding as needed */
+                outline: none; /* Remove the default outline when the div is focused */
+            }
+
+            .editable-div {
+                width: 90vw; /* Set your desired width */
+                border: 1px solid #ccc;
+                overflow: auto; /* Hide content that overflows the div */
             }
 
             .limited-height-div {
@@ -20,10 +27,83 @@
         </style>
     </head>
     <body>
+        {{user.id|json_script:"user_id_json"}}
+        {{page.id|json_script:"page_id_json"}}
+        <script>
+            let user_id = JSON.parse(document.getElementById('user_id_json').textContent);
+            let page_id = JSON.parse(document.getElementById('page_id_json').textContent);
+
+            var url = "";
+            const origin = window.location.origin;
+
+            const data = {
+                "user_id": user_id,
+                "page_id": page_id
+            }
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify(data) 
+            };
+
+            function bookmark(){
+                url = origin + "/bookmark/add"
+                fetch(url, requestOptions)
+                .then(response => {
+                    if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json(); 
+                })
+                .then(data => {
+                    console.log('Response data:', data);
+                    document.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    
+                });
+
+            }
+
+            function unbookmark(){
+                url = origin + "/bookmark/delete"
+
+                fetch(url, requestOptions)
+                .then(response => {
+                    if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json(); 
+                })
+                .then(data => {
+                    console.log('Response data:', data);
+                    document.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    
+                });
+            }
+
+        </script>
         <a href="/"><button>Go to home</button></a>
+        {% if user.is_anonymous %}
+            <a href="/accounts/login" style="float: right;"><button>Login</button></a>
+        {% else %}
+            <a href="/accounts/logout" style="float: right;"><button>Logout</button></a>
+        {%endif%}
+        {% if not bookmarked %}
+            <button onclick=bookmark() id="bookmark">Bookmark!</button>
+        {% else %}
+            <button onclick=unbookmark()>Unbookmark</button>
+        {% endif %}
         <h1>{{page.title}} </h1>
 
-        <textarea readonly class="page"> {{page.data | safe}} </textarea>
+        <div class="editable-div"><div contenteditable="true" class="editable-content"> {{page.data | safe}} </div></div>
 
         {% if tags|length > 0 %}
         <h3>Tags:</h3>
@@ -34,18 +114,24 @@
         </ul>
         {% endif %}
 
+        {% if user.is_authenticated %}
         <h3>add comment:</h3>
         <form action="/comments/add?user_id={{user.id}}&page_id={{page.id}}" method="POST">
             {% csrf_token %}
             <p>
-                <div class="limited-height-div">
-                <div style="border: solid 2px red; max-width: 80vw;">
-                {{comment_form.as_p}}
+                <div style="border: solid 2px red;"> 
+                <div class-"limited-height-div" style="width:100vw;">{{comment_form.text}}</div>
+                {{comment_form.user_id.as_hidden}}
+                {{comment_form.page_id.as_hidden}}
                 </div>
                 </div>
             </p>
             <input type="submit" value="Submit">
         </form>
+        {% else %}
+            <p>Please login to comment</p>
+        {% endif %}
+
 
         {% if comments|length > 0%}
             <h3> comments: </h3>

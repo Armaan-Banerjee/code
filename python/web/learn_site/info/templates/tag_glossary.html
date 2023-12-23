@@ -1,0 +1,10 @@
+<html>
+    <body>
+        <h1>tag glossary</h1>
+        <ul>
+            {% for tag in tags %}
+            <li><a href="/tag/{{tag.id}}/{{tag.name}}">{{tag.name}}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

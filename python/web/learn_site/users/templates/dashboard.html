@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <h1>Hello {{user.username}}</h1>
+        <p>You joined on {{user.date_joined}} </p>
+
+        
+        <h3>Bookmarks: </h3>
+        {% if bookmarks|length > 0%}
+        <ul>
+            {% for bookmark in bookmarks %}
+            <li><a href="/page/{{bookmark.page.id}}/from_dashboard">{{bookmark.page.title}}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p> Add bookmarks to see them here! </p>
+        {% endif %}
+
+        <h3>Comments: </h3>
+        {% if comments|length > 0%}
+        <ul>
+            {% for comment in comments %}
+            <li><a href="/page/{{comment.pages.id}}/from_dashboard">{{comment.text}}</a> on page: {{comment.pages.title}}</li>
+            {%endfor%}
+        </ul>
+        {% else %}
+        <p> Create comments to see them here!</p>
+        {%endif%}
+    </body>
+</html>

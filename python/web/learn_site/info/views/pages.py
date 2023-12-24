@@ -82,8 +82,8 @@ def handle_page_create(request):
 
         form_tag = create_new_tag()
 
-        print(form)
-        print(Tags.set_all())
+        #print(form)
+        #print(Tags.set_all())
 
         template = loader.get_template("add_page.html")
 

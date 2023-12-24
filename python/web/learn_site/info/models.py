@@ -67,10 +67,11 @@ class Tags(models.Model):
     
     @staticmethod
     def set_all():
-        results = Tags.objects.all().values()
+        results = Tags.objects.all()
         end = []
         for res in results:
-            ou = (res["id"], res["name"])
+            res.refresh_from_db()
+            ou = (res.id, res.name)
             end.append(ou)
 
         return end

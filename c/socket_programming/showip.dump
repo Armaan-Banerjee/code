@@ -1,0 +1,124 @@
+
+showip:	file format mach-o 64-bit x86-64
+
+Disassembly of section __TEXT,__text:
+
+0000000100003d00 <_main>:
+100003d00: 55                          	pushq	%rbp
+100003d01: 48 89 e5                    	movq	%rsp, %rbp
+100003d04: 48 81 ec d0 00 00 00        	subq	$208, %rsp
+100003d0b: 48 8b 05 f6 02 00 00        	movq	758(%rip), %rax         ## 0x100004008 <_printf+0x100004008>
+100003d12: 48 8b 00                    	movq	(%rax), %rax
+100003d15: 48 89 45 f8                 	movq	%rax, -8(%rbp)
+100003d19: c7 45 bc 00 00 00 00        	movl	$0, -68(%rbp)
+100003d20: 89 7d b8                    	movl	%edi, -72(%rbp)
+100003d23: 48 89 75 b0                 	movq	%rsi, -80(%rbp)
+100003d27: 83 7d b8 02                 	cmpl	$2, -72(%rbp)
+100003d2b: 0f 84 24 00 00 00           	je	0x100003d55 <_main+0x55>
+100003d31: 48 8b 05 d8 02 00 00        	movq	728(%rip), %rax         ## 0x100004010 <_printf+0x100004010>
+100003d38: 48 8b 38                    	movq	(%rax), %rdi
+100003d3b: 48 8d 35 10 02 00 00        	leaq	528(%rip), %rsi         ## 0x100003f52 <_printf+0x100003f52>
+100003d42: b0 00                       	movb	$0, %al
+100003d44: e8 df 01 00 00              	callq	0x100003f28 <_printf+0x100003f28>
+100003d49: c7 45 bc 01 00 00 00        	movl	$1, -68(%rbp)
+100003d50: e9 97 01 00 00              	jmp	0x100003eec <_main+0x1ec>
+100003d55: 48 8d 7d 80                 	leaq	-128(%rbp), %rdi
+100003d59: 31 f6                       	xorl	%esi, %esi
+100003d5b: ba 30 00 00 00              	movl	$48, %edx
+100003d60: e8 e1 01 00 00              	callq	0x100003f46 <_printf+0x100003f46>
+100003d65: c7 45 84 00 00 00 00        	movl	$0, -124(%rbp)
+100003d6c: c7 45 88 01 00 00 00        	movl	$1, -120(%rbp)
+100003d73: 48 8b 45 b0                 	movq	-80(%rbp), %rax
+100003d77: 48 8b 78 08                 	movq	8(%rax), %rdi
+100003d7b: 31 c0                       	xorl	%eax, %eax
+100003d7d: 89 c6                       	movl	%eax, %esi
+100003d7f: 48 8d 55 80                 	leaq	-128(%rbp), %rdx
+100003d83: 48 8d 8d 78 ff ff ff        	leaq	-136(%rbp), %rcx
+100003d8a: e8 ab 01 00 00              	callq	0x100003f3a <_printf+0x100003f3a>
+100003d8f: 89 85 6c ff ff ff           	movl	%eax, -148(%rbp)
+100003d95: 83 f8 00                    	cmpl	$0, %eax
+100003d98: 0f 84 40 00 00 00           	je	0x100003dde <_main+0xde>
+100003d9e: 48 8b 05 6b 02 00 00        	movq	619(%rip), %rax         ## 0x100004010 <_printf+0x100004010>
+100003da5: 48 8b 00                    	movq	(%rax), %rax
+100003da8: 48 89 85 40 ff ff ff        	movq	%rax, -192(%rbp)
+100003daf: 8b bd 6c ff ff ff           	movl	-148(%rbp), %edi
+100003db5: e8 7a 01 00 00              	callq	0x100003f34 <_printf+0x100003f34>
+100003dba: 48 8b bd 40 ff ff ff        	movq	-192(%rbp), %rdi
+100003dc1: 48 89 c2                    	movq	%rax, %rdx
+100003dc4: 48 8d 35 9f 01 00 00        	leaq	415(%rip), %rsi         ## 0x100003f6a <_printf+0x100003f6a>
+100003dcb: b0 00                       	movb	$0, %al
+100003dcd: e8 56 01 00 00              	callq	0x100003f28 <_printf+0x100003f28>
+100003dd2: c7 45 bc 02 00 00 00        	movl	$2, -68(%rbp)
+100003dd9: e9 0e 01 00 00              	jmp	0x100003eec <_main+0x1ec>
+100003dde: 48 8b 45 b0                 	movq	-80(%rbp), %rax
+100003de2: 48 8b 70 08                 	movq	8(%rax), %rsi
+100003de6: 48 8d 3d 8e 01 00 00        	leaq	398(%rip), %rdi         ## 0x100003f7b <_printf+0x100003f7b>
+100003ded: b0 00                       	movb	$0, %al
+100003def: e8 58 01 00 00              	callq	0x100003f4c <_printf+0x100003f4c>
+100003df4: 48 8b 85 78 ff ff ff        	movq	-136(%rbp), %rax
+100003dfb: 48 89 85 70 ff ff ff        	movq	%rax, -144(%rbp)
+100003e02: 48 83 bd 70 ff ff ff 00     	cmpq	$0, -144(%rbp)
+100003e0a: 0f 84 c9 00 00 00           	je	0x100003ed9 <_main+0x1d9>
+100003e10: 48 8b 85 70 ff ff ff        	movq	-144(%rbp), %rax
+100003e17: 83 78 04 02                 	cmpl	$2, 4(%rax)
+100003e1b: 0f 85 37 00 00 00           	jne	0x100003e58 <_main+0x158>
+100003e21: 48 8b 85 70 ff ff ff        	movq	-144(%rbp), %rax
+100003e28: 48 8b 40 20                 	movq	32(%rax), %rax
+100003e2c: 48 89 85 50 ff ff ff        	movq	%rax, -176(%rbp)
+100003e33: 48 8b 85 50 ff ff ff        	movq	-176(%rbp), %rax
+100003e3a: 48 83 c0 04                 	addq	$4, %rax
+100003e3e: 48 89 85 60 ff ff ff        	movq	%rax, -160(%rbp)
+100003e45: 48 8d 05 46 01 00 00        	leaq	326(%rip), %rax         ## 0x100003f92 <_printf+0x100003f92>
+100003e4c: 48 89 85 58 ff ff ff        	movq	%rax, -168(%rbp)
+100003e53: e9 32 00 00 00              	jmp	0x100003e8a <_main+0x18a>
+100003e58: 48 8b 85 70 ff ff ff        	movq	-144(%rbp), %rax
+100003e5f: 48 8b 40 20                 	movq	32(%rax), %rax
+100003e63: 48 89 85 48 ff ff ff        	movq	%rax, -184(%rbp)
+100003e6a: 48 8b 85 48 ff ff ff        	movq	-184(%rbp), %rax
+100003e71: 48 83 c0 08                 	addq	$8, %rax
+100003e75: 48 89 85 60 ff ff ff        	movq	%rax, -160(%rbp)
+100003e7c: 48 8d 05 14 01 00 00        	leaq	276(%rip), %rax         ## 0x100003f97 <_printf+0x100003f97>
+100003e83: 48 89 85 58 ff ff ff        	movq	%rax, -168(%rbp)
+100003e8a: 48 8b 85 70 ff ff ff        	movq	-144(%rbp), %rax
+100003e91: 8b 78 04                    	movl	4(%rax), %edi
+100003e94: 48 8b b5 60 ff ff ff        	movq	-160(%rbp), %rsi
+100003e9b: 48 8d 55 c0                 	leaq	-64(%rbp), %rdx
+100003e9f: b9 2e 00 00 00              	movl	$46, %ecx
+100003ea4: e8 97 00 00 00              	callq	0x100003f40 <_printf+0x100003f40>
+100003ea9: 48 8b b5 58 ff ff ff        	movq	-168(%rbp), %rsi
+100003eb0: 48 8d 55 c0                 	leaq	-64(%rbp), %rdx
+100003eb4: 48 8d 3d e1 00 00 00        	leaq	225(%rip), %rdi         ## 0x100003f9c <_printf+0x100003f9c>
+100003ebb: b0 00                       	movb	$0, %al
+100003ebd: e8 8a 00 00 00              	callq	0x100003f4c <_printf+0x100003f4c>
+100003ec2: 48 8b 85 70 ff ff ff        	movq	-144(%rbp), %rax
+100003ec9: 48 8b 40 28                 	movq	40(%rax), %rax
+100003ecd: 48 89 85 70 ff ff ff        	movq	%rax, -144(%rbp)
+100003ed4: e9 29 ff ff ff              	jmp	0x100003e02 <_main+0x102>
+100003ed9: 48 8b bd 78 ff ff ff        	movq	-136(%rbp), %rdi
+100003ee0: e8 49 00 00 00              	callq	0x100003f2e <_printf+0x100003f2e>
+100003ee5: c7 45 bc 00 00 00 00        	movl	$0, -68(%rbp)
+100003eec: 8b 45 bc                    	movl	-68(%rbp), %eax
+100003eef: 89 85 3c ff ff ff           	movl	%eax, -196(%rbp)
+100003ef5: 48 8b 05 0c 01 00 00        	movq	268(%rip), %rax         ## 0x100004008 <_printf+0x100004008>
+100003efc: 48 8b 00                    	movq	(%rax), %rax
+100003eff: 48 8b 4d f8                 	movq	-8(%rbp), %rcx
+100003f03: 48 39 c8                    	cmpq	%rcx, %rax
+100003f06: 0f 85 0f 00 00 00           	jne	0x100003f1b <_main+0x21b>
+100003f0c: 8b 85 3c ff ff ff           	movl	-196(%rbp), %eax
+100003f12: 48 81 c4 d0 00 00 00        	addq	$208, %rsp
+100003f19: 5d                          	popq	%rbp
+100003f1a: c3                          	retq
+100003f1b: e8 02 00 00 00              	callq	0x100003f22 <_printf+0x100003f22>
+100003f20: 0f 0b                       	ud2
+
+Disassembly of section __TEXT,__stubs:
+
+0000000100003f22 <__stubs>:
+100003f22: ff 25 d8 00 00 00           	jmpq	*216(%rip)              ## 0x100004000 <_printf+0x100004000>
+100003f28: ff 25 ea 00 00 00           	jmpq	*234(%rip)              ## 0x100004018 <_printf+0x100004018>
+100003f2e: ff 25 ec 00 00 00           	jmpq	*236(%rip)              ## 0x100004020 <_printf+0x100004020>
+100003f34: ff 25 ee 00 00 00           	jmpq	*238(%rip)              ## 0x100004028 <_printf+0x100004028>
+100003f3a: ff 25 f0 00 00 00           	jmpq	*240(%rip)              ## 0x100004030 <_printf+0x100004030>
+100003f40: ff 25 f2 00 00 00           	jmpq	*242(%rip)              ## 0x100004038 <_printf+0x100004038>
+100003f46: ff 25 f4 00 00 00           	jmpq	*244(%rip)              ## 0x100004040 <_printf+0x100004040>
+100003f4c: ff 25 f6 00 00 00           	jmpq	*246(%rip)              ## 0x100004048 <_printf+0x100004048>

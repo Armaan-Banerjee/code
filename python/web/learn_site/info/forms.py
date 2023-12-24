@@ -2,8 +2,13 @@ from django import forms
 from .models import Tags
 
 class create_new_page(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        super(create_new_page, self).__init__(*args, **kwargs)
+        self.fields['tags'].choices = Tags.set_all()
+
     title = forms.CharField(max_length=255, help_text="please enter the title of this page")
-    data = forms.CharField(widget=forms.Textarea, help_text="Please enter the text")
+    data = forms.CharField(widget=forms.Textarea)
     OPTIONS = Tags.set_all()
     tags = forms.MultipleChoiceField(help_text="Please enter the name for this tag", widget=forms.CheckboxSelectMultiple,
     choices=OPTIONS, required=False)

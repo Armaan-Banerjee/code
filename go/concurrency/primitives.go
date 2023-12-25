@@ -8,7 +8,7 @@ func pn(num string){
 }
 
 
-func main(){
+func main_primitives(){
     go pn("1")
     go pn("2")
     go pn("3")

@@ -33,7 +33,6 @@ class ComentTree:
         while queue:
             current_node = queue.pop(0)
             if current_node.comment == value:
-                print(current_node.comment)
                 matches.append(current_node)
             print(current_node.comment)
             queue.extend(current_node.children)

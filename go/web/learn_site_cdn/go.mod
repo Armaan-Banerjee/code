@@ -2,7 +2,10 @@ module learn-site/cdn
 
 go 1.19
 
-require github.com/gin-gonic/gin v1.9.1
+require (
+	github.com/gin-gonic/gin v1.9.1
+	github.com/google/uuid v1.5.0
+)
 
 require (
 	github.com/bytedance/sonic v1.9.1 // indirect

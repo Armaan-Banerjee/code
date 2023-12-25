@@ -31,7 +31,7 @@ func sq(in <- chan int) <- chan int{ // method for squaring numbers in channel
 }
 
 
-func main(){
+func main_pipelines(){
     //input
 
     nums := []int{1, 4, 5, 3, 2} // creats an input slice

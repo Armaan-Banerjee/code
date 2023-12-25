@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main(){
+func main_for_select(){
     charChannel := make(chan string, 3) //makes a buffered channel which allows for asynchronous operation nad go rountine can continue without being blocked
 
     chars := []string{"a", "b", "c"}

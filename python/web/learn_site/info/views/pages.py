@@ -8,7 +8,7 @@ from users.models import Bookmark
 
 def info_index(request):
     pages = Pages.objects.all().values()
-    tags = Tags.objects.all().values()
+    tags = Tags.objects.all()
     template = loader.get_template('index.html')
 
     context = {

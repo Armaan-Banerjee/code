@@ -10,7 +10,7 @@ func Add[T Num](a T, b T) T {
     return a + b
 }
 
-func main(){
+func main_generics(){
     result := Add(1, 2)
-    fmt.Println("result: %+v\n", result)
+    fmt.Printf("result: %+v\n", result)
 }

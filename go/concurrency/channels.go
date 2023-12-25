@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func main_channels() {
     channel := make(chan string)
 
     go func(){

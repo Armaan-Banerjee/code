@@ -108,7 +108,7 @@
         {% endif %}
         <h1>{{page.title}} </h1>
 
-        <div class="editable-div"><div contenteditable="true" class="editable-content"> {{page.data | linebreaks | safe}} </div></div>
+        <div class="editable-div"><div contenteditable="true" class="editable-content"> {{page.data | safe | linebreaks}} </div></div>
 
         {% if tags|length > 0 %}
         <h3>Tags:</h3>

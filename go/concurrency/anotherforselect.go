@@ -14,7 +14,7 @@ func dowork(done <- chan bool){
     }
 }
 
-func main(){
+func main_another_for_solect(){
 
     done := make(chan bool)
 

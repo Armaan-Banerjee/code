@@ -69,7 +69,7 @@ func FileUploadView(c * gin.Context){
 
 }
 
-func search_files(file_id string) {
+func search_files(file_id string) (bool, string){
     pattern := filepath.Join("./uploads", file_id+".*")
 
     matches, err := filepath.Glob(pattern)
@@ -87,14 +87,18 @@ func search_files(file_id string) {
 }
 
 func RetreiveFileView(c *gin.Context){
-    fileID := c.Param("fileid")
+    //fileID := c.Param("fileid")
+    fileID := c.Query("fileid")
     
-    file := search_files(fileID)
-    if file != ""{
-        c.File("./uploads/" + file)
+    fmt.Println(fileID)
+    exists, file := search_files(fileID)
+    
+    if exists {
+        fmt.Println(file)
+        c.File(file)
         return 
     }
-
+    
     c.JSON(http.StatusBadRequest, gin.H{"error": "file not found"})
     
 
@@ -110,6 +114,7 @@ func main() {
     
     router.GET("/", ApiIndex)
     router.POST("/upload", FileUploadView)
+    router.GET("/download", RetreiveFileView)
 
     router.Run("0.0.0.0:1155")
 }

@@ -10,7 +10,7 @@ def add_new_tag(request):
         form = create_new_tag(request.POST)
 
         if form.is_valid():
-            name = slugify(form.cleaned_data["name"], allow_unicode=True)
+            name = slugify(form.cleaned_data["name"], allow_unicode=True).capitalize()
             details = form.cleaned_data["details"]
 
             if Tags.check_if_valid(name=name):
@@ -48,6 +48,7 @@ def edit_tag_view(request, name, id):
         form = edit_tag(request.POST)
 
         if form.is_valid():
+            print(slugify(form.cleaned_data["name"]))
             name = slugify(form.cleaned_data["name"], allow_unicode=True)
             details = form.cleaned_data["details"]
             

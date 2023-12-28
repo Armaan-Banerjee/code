@@ -37,6 +37,7 @@ def create_comment_view(request):
 
         return HttpResponseRedirect(f"/page/{page_id}/comment_add")
     
-
+def comments_views(request):
+    return HttpResponse("responding")
     
 

@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <style>
+            .flashcard {
+              width: 90vw;
+              height: 60vh;
+              border: 1px solid #ccc;
+              padding: 20px;
+              text-align: center;
+              cursor: pointer;
+              margin: 10px;
+            }
+        
+            .back {
+                display: none;
+            }
+          
+            .flip .front {
+                display: none;
+            }
+          
+            .flip .back {
+                display: block;
+            }
+          </style>
+
+          <script>
+            function flipCard(cardId) {
+                var card = document.getElementById(cardId);
+                card.classList.toggle('flip');
+            }
+        </script>
+    </head>
+    <body>
+        <a href="/"><button>home</button></a>
+        <a href="/flashcards/all"><button>All flashcards</button></a>
+
+        <h1> {{flashcard.title}} | <a href="/user/{{user.id}}">{{user.username}}</a></h1>
+
+        
+        {% for card in keywords %}
+        <div class="flashcard" id="{{card.id}}" onclick="flipCard('{{card.id}}')">
+            <div class="front">{{card.front | linebreaks}} </div>
+            <div class="back"> {{card.back | linebreaks}}</div>
+        </div>
+        {%endfor%}
+
+    </body>
+</html>

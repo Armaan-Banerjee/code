@@ -1,0 +1,13 @@
+<html>
+    <body>
+        <a href="/"><button>home</button></a>
+
+        <h1> All flashcards </h1>
+
+        <ul>
+        {%for flashcard in flashcards%}
+        <li> <a href="/flashcard/{{flashcard.id}}/{{flashcard.title}}">{{flashcard.title}}</a> by {{flashcard.user.username}}</li>
+        {%endfor%}
+        </ul>
+    </body>
+</html>

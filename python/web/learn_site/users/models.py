@@ -18,8 +18,9 @@ class User(AbstractUser):
         comments = self.comment_set.all()
         return comments
     
-    
-    
+    def get_flashcards(self):
+        flashcards = self.flashcard_set.all()
+        return flashcards
 
 
 class Bookmark(models.Model):

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <script>
+            var count = 1;
+
+            function AddCard() {
+                let temp = document.getElementsByTagName("template")[0];
+                let clon = temp.content.cloneNode(true);
+
+                let inputs = clon.querySelectorAll('input');
+                inputs.forEach((input) => {
+                    input.setAttribute('name', 'card_' + count);
+                });
+
+                cards = document.getElementById("keywords");
+                cards.appendChild(clon);
+
+                count++
+
+                //let inputs = cards.getElementsByTagName("input");
+                //var count = 1;
+                //for (let input of inputs) {
+                    //input.setAttribute("name", "card_" + count++);
+                //} 
+            }
+        </script>
+    </head>
+    <body>
+        <template>
+            <div style="border: 2px black solid;">
+            <p> What is the front of the card?</p><input type="text">
+            <p> What is the back of the card?</p><input type="text"></div>
+        </template>
+
+        <h1> Add Flashcard! </h1>
+        <form action="/flashcards/add" method="POST">
+            <p>Title: <input type="text" name="title"></p>
+            <input type="hidden" name="userid" value={{user.id}}>
+            <button type="button" onclick="AddCard()">Add card</button>
+            <br>
+            <div id="keywords"></div>
+            <input type="submit" value="submit"> 
+        </form>
+    </body>
+</html>

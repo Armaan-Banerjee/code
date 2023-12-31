@@ -9,5 +9,16 @@
         <li> <a href="/flashcard/{{flashcard.id}}/{{flashcard.title}}">{{flashcard.title}}</a> by {{flashcard.user.username}}</li>
         {%endfor%}
         </ul>
+
+        <h1>My flashcards</h1>
+
+        <a href="/flashcards/add"><button>Add flashcard</button></a>
+        <ul>
+        {% for card in usercards %}
+            <li> <a href="/flashcard/{{card.id}}/{{card.title}}">{{card.title}}</a></li>
+        {% empty %}
+        <p> Create some flashcards to show here! </p>
+        {%endfor%}
+        </ul>
     </body>
 </html>

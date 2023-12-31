@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-
+from users.models import User
 # Create your models here.
 
 class Flashcard(models.Model):
@@ -18,6 +18,14 @@ class Flashcard(models.Model):
     
     def all_cards(self):
         return self.keyword_set.all()
+    
+    @staticmethod
+    def add_flashcard(title, userid, private=True):
+        user = User.objects.get(id=userid)
+        new = Flashcard(title=title, user=user, private=private)
+        new.save()
+
+        return new
 
 class Keyword(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -27,6 +35,14 @@ class Keyword(models.Model):
 
     def __str__(self):
         return f"{self.id} | {self.front}"
+    
+    @staticmethod
+    def add_keyword(front, back, flashcard):
+
+        new_keyword = Keyword(front=front, back=back, flashcard=flashcard)
+        new_keyword.save()
+
+        return new_keyword
 
 class Quiz(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

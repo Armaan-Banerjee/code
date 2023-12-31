@@ -1,8 +1,9 @@
 using System;
-class hi
-{
-  static void Main(string[] args)
-  {
-      Console.WriteLine("Hello World");
-  }
+
+namespace hi{
+    class hello{
+        static void Main(string[] args){
+             Console.WriteLine("Hello World");
+        }
+    }
 }

@@ -16,3 +16,4 @@ def api_quizzes(request):
     outdict = {"quizzes": quizlist}
 
     return JsonResponse(outdict)
+

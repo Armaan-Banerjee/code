@@ -88,7 +88,7 @@ func uploadFile(c *gin.Context, file multipart.FileHeader, image bool) (*string,
         return nil, errors.New("could not upload file")
     }
 
-    return &uploadname, nil
+    return &uuid, nil
 
 }
 
@@ -96,15 +96,6 @@ func FileUploadView(c *gin.Context){
     form, _ := c.MultipartForm()
     files := form.File["upload[]"]
    
-    // currentDir, err := os.Getwd()
-	// if err != nil {
-	// 	fmt.Println("Error getting directory:", err)
-	// 	return
-	// }
-
-    //dst := currentDir + "/uploads"
-    // fmt.Println(dst)
-
     var filenames = make([]string, 0, len(files))
 
     for _, file := range files {
@@ -114,30 +105,9 @@ func FileUploadView(c *gin.Context){
         if errf != nil{
             fmt.Println("There was an error", errf)
         }
-        // prev_name := file.Filename
         
-        // uuid := (uuid.New()).String()
-        // extensionParts := strings.Split(prev_name, ".")
-        // if len(extensionParts) < 2 {
-        //     fmt.Println("File has no extension:", prev_name)
-        //     return
-        // }
-        // extension := extensionParts[len(extensionParts) - 1]
-
-        // final_name := uuid + "." + string(extension)
-        // file.Filename = final_name
-
-        // dst := dst + "/" + file.Filename
-
-        // errfile := c.SaveUploadedFile(file, dst)
-        // if errfile != nil {
-        //     fmt.Println("Error uploading file", errfile)
-        // }
-
         filenames = append(filenames, *res)
 
-        //fmt.Printf("Uploading file: %s, with name:  %s", prev_name, final_name)
-        
      }
 
      c.JSON(http.StatusOK, gin.H{

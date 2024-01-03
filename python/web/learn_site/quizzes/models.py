@@ -1,6 +1,8 @@
 from django.db import models
 import uuid
 from users.models import User
+from info.services.slugs import slugify
+
 # Create your models here.
 
 class Flashcard(models.Model):
@@ -48,6 +50,31 @@ class Quiz(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f"{self.id} | {self.title}"
+
+    @staticmethod
+    def add_quiz_from_dict(data : dict):
+        
+        title = data["title"] 
+        quiz = Quiz(title=slugify(title))  
+
+        quiz.save()
+
+        questions = data["questions"]
+        for question in questions:
+            
+            ques = question["question"]
+            q = QuizQuestion.add_question(ques, quiz)
+
+            answers = question["answers"]
+
+            for answer in answers:
+                QuizAnswer.add_answer(answer, q)
+
+        return quiz
+
+
     def all_questions(self):
         return self.quizquestion_set.all()
     
@@ -71,6 +98,17 @@ class QuizQuestion(models.Model):
     question = models.TextField()
     quiz = models.ForeignKey("Quiz", blank=True, null=True, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.id} | {self.question}"
+
+    @staticmethod
+    def add_question(question, quiz):
+        
+        question = QuizQuestion(question=question, quiz=quiz)
+        question.save()
+
+        return question
+
     def all_answers(self):
         return self.quizanswer_set.all()
 
@@ -78,3 +116,14 @@ class QuizAnswer(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     answer = models.TextField()
     question = models.ForeignKey("QuizQuestion", blank=True, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.id} | {self.question}"
+
+    @staticmethod
+    def add_answer(answer, question):
+        answer = QuizAnswer(answer=answer, question=question)
+
+        answer.save()
+
+        return answer
